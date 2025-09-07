@@ -1,0 +1,152 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #f6f6f6;
+  background-color: #2f2f2f;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  background-color: #3a3a3a;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+  color: #ffffff;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+label {
+  font-weight: 500;
+  white-space: nowrap;
+  color: #ccc;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #2f2f2f;
+  color: #f6f6f6;
+  font-size: 1em;
+}
+
+input[type="range"] { padding: 0; }
+
+button {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #5372F0;
+  color: white;
+}
+
+button:hover { background-color: #435DBF; }
+button:active { transform: scale(0.98); }
+#stop-button { background-color: #C23A3A; }
+#stop-button:hover { background-color: #A03030; }
+button:disabled {
+  background-color: #555;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* --- NEW STYLES --- */
+.target-area {
+  position: relative;
+  /* Adjusted for a wider, monitor-like aspect ratio (e.g., 16:9) */
+  width: 100%; /* Take full width of parent */
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio (9/16 = 0.5625) */
+  height: 0; /* Important for padding-bottom trick */
+  background: linear-gradient(to bottom, #4a90e2, #88d3ce); /* Wallpaper */
+  border: 1px solid #777;
+  border-radius: 6px;
+  cursor: crosshair;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* Inner content wrapper for proper centering with padding-bottom trick */
+.target-area-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.target-area::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.4); /* Taskbar */
+  backdrop-filter: blur(2px);
+}
+
+
+
+.toast-notification {
+  position: fixed;
+  bottom: -100px; /* Start off-screen */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #22a06b;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: bottom 0.5s ease-in-out;
+  z-index: 1000;
+}
+
+.toast-notification.show {
+  bottom: 30px; /* Slide into view */
+}
