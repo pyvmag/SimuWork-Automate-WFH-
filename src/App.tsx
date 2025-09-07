@@ -7,10 +7,8 @@ const screenHeight = window.screen.height || 1080;
 
 function ConfigurationPanel() {
   const [activityLevel, setActivityLevel] = useState('Medium');
-  // --- ADDED BACK ---
   const [mouseSpeed, setMouseSpeed] = useState(50);
   const [wpm, setWpm] = useState(40);
-  // ---
   const [isRunning, setIsRunning] = useState(false);
   const [targetCoords, setTargetCoords] = useState({ x: 0.5, y: 0.5 });
   const [toastMessage, setToastMessage] = useState('');
@@ -32,7 +30,6 @@ function ConfigurationPanel() {
       y: Math.round(targetCoords.y * screenHeight),
     };
 
-    // Pass mouseSpeed to the backend as well
     await invoke('start_simulation', { level: activityLevel, coords: absoluteCoords, mouseSpeed });
   };
 
@@ -70,16 +67,15 @@ function ConfigurationPanel() {
         </select>
       </div>
 
-      {/* --- ADDED BACK --- */}
       <div className="row">
         <label htmlFor="mouse-speed">Mouse Speed: {mouseSpeed}</label>
         <input type="range" id="mouse-speed" min="1" max="100" value={mouseSpeed} onChange={(e) => setMouseSpeed(parseInt(e.target.value, 10))} disabled={isRunning} />
       </div>
+
       <div className="row">
         <label htmlFor="wpm">Typing Speed (WPM):</label>
         <input type="number" id="wpm" value={wpm} onChange={(e) => setWpm(parseInt(e.target.value, 10))} disabled={isRunning} />
       </div>
-      {/* --- */}
 
       <div className="row">
         <label>Typing Target: ({displayX}, {displayY})</label>
@@ -90,13 +86,14 @@ function ConfigurationPanel() {
         onClick={handleTargetSelect}
         title="Click inside this area to set the target for typing/clicking on your real screen"
       >
-        <div className="target-area-content"> {/* NEW WRAPPER */}
-          Click to set target
+         <div className="target-area-content">
+            Click to set target
         </div>
       </div>
 
       <div className="row">
-        <button onClick={handleStart} disabled={isRunning}>Start</button>
+        {/* Added IDs for more specific styling */}
+        <button id="start-button" onClick={handleStart} disabled={isRunning}>Start</button>
         <button id="stop-button" onClick={handleStop} disabled={!isRunning}>Stop</button>
       </div>
 
